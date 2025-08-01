@@ -1,0 +1,64 @@
+body {
+  background-color: #1c2331;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #1a3c2f; /* Bottle green text color for "To Do List" */
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 1rem;
+}
+
+/* Input and Add Button */
+input[type="text"] {
+  width: 70%;
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  margin-left: 10px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Button color tweaks */
+.add-button,
+.uppercase-all-button,
+.task-buttons button {
+  background-color: #1a3c2f; /* bottle green */
+}
+
+.add-button:hover,
+.uppercase-all-button:hover,
+.task-buttons button:hover {
+  background-color: #145a32; /* darker shade for hover */
+}
+
+/* Task container styling */
+.task-container {
+  background-color: #2d3e50;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}

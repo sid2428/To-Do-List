@@ -1,0 +1,113 @@
+/* Base container styling */
+.todo-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 12px;
+  background-color: #1e293b; /* slate-800 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  font-family: 'Segoe UI', sans-serif;
+  color: #e2e8f0; /* slate-200 */
+}
+
+/* Title */
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+ color: #1a3c2f; /* lightest text */
+}
+
+/* Input section */
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #334155; /* slate-700 */
+  color: #f1f5f9; /* slate-100 */
+}
+
+.task-input::placeholder {
+  color: #94a3b8; /* placeholder text */
+}
+
+.add-button {
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #3b82f6; /* blue-500 */
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #2563eb; /* blue-600 */
+}
+
+/* Task list */
+.task-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #334155; /* slate-700 */
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.task-text {
+  flex: 1;
+  margin-left: 10px;
+  color: #e2e8f0; /* slate-200 */
+}
+
+/* Button group inside each task */
+.button-group button {
+  margin-left: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #475569; /* slate-600 */
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-group button:hover {
+  background-color: #64748b; /* slate-500 */
+}
+
+/* Main uppercase all button */
+.uppercase-all {
+  margin-top: 24px;
+  padding: 12px;
+  width: 100%;
+  background-color: #16a34a; /* green-600 */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.uppercase-all:hover {
+  background-color: #15803d; /* green-700 */
+}
