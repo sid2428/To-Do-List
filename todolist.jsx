@@ -1,46 +1,50 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import "./ToDoList.css";
+import "./ToDoList.css"; // import CSS
 
 function ToDoList() {
-    const [todos, setTodos] = useState([{ task: "Sample", id: uuidv4() }]);
-    const [newTodo, setNewTodo] = useState("");
+    let [todos, settodos] = useState([{ task: "Sample", id: uuidv4() }]);
+    let [newTodo, setnewTodo] = useState("");
 
-    const addNewTask = () => {
-        if (newTodo.trim() === "") return;
-        setTodos(prev => [...prev, { task: newTodo, id: uuidv4() }]);
-        setNewTodo("");
+    let addNewTask = () => {
+        settodos((prevTodos) => {
+            return [...prevTodos, { task: newTodo, id: uuidv4() }];
+        });
+        setnewTodo("");
     };
 
-    const updateTodo = (e) => {
-        setNewTodo(e.target.value);
+    let updateTodo = (event) => {
+        setnewTodo(event.target.value);
     };
 
-    const deleteToDo = (id) => {
-        setTodos(prev => prev.filter(todo => todo.id !== id));
+    let deleteToDo = (id) => {
+        let newcopy = todos.filter((todo) => todo.id !== id);
+        settodos(newcopy);
     };
 
-    const upperCaseAll = () => {
-        setTodos(prev => prev.map(todo => ({
-            ...todo,
-            task: todo.task.toUpperCase()
-        })));
+    let UpperCaseAll = () => {
+        settodos((prevupdate) =>
+            prevupdate.map((todo) => ({
+                ...todo,
+                task: todo.task.toUpperCase(),
+            }))
+        );
     };
 
-    const upperCaseOne = (id) => {
-        setTodos(prev => prev.map(todo =>
-            todo.id === id
-                ? { ...todo, task: todo.task.toUpperCase() }
-                : todo
-        ));
+    let UpperCaseOne = (id) => {
+        settodos((prevupdate) =>
+            prevupdate.map((todo) =>
+                todo.id === id ? { ...todo, task: todo.task.toUpperCase() } : todo
+            )
+        );
     };
 
-    const markDone = (id) => {
-        setTodos(prev => prev.map(todo =>
-            todo.id === id
-                ? { ...todo, task: "✅ " + todo.task }
-                : todo
-        ));
+    let Done = (id) => {
+        settodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, task: "✅ " + todo.task } : todo
+            )
+        );
     };
 
     return (
@@ -57,19 +61,19 @@ function ToDoList() {
             </div>
 
             <ul className="task-list">
-                {todos.map(todo => (
+                {todos.map((todo) => (
                     <li key={todo.id} className="task-item">
                         <span className="task-text">{todo.task}</span>
                         <div className="button-group">
                             <button onClick={() => deleteToDo(todo.id)}>Delete</button>
-                            <button onClick={() => upperCaseOne(todo.id)}>UpperCase</button>
-                            <button onClick={() => markDone(todo.id)}>Mark Done</button>
+                            <button onClick={() => UpperCaseOne(todo.id)}>UpperCase</button>
+                            <button onClick={() => Done(todo.id)}>Mark as Done</button>
                         </div>
                     </li>
                 ))}
             </ul>
 
-            <button className="uppercase-all" onClick={upperCaseAll}>UpperCase All</button>
+            <button className="uppercase-all" onClick={UpperCaseAll}>UpperCase All</button>
         </div>
     );
 }
