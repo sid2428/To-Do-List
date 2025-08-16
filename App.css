@@ -1,64 +1,66 @@
-body {
-  background-color: #1c2331;
-  font-family: Arial, sans-serif;
-}
-
+/* App.css - Clean Button and Title Styles with Animations */
 h1 {
-  color: #1a3c2f; /* Bottle green text color for "To Do List" */
+  color: #ffffff;
   text-align: center;
   font-size: 2.5rem;
-  margin-top: 1rem;
-}
-
-/* Input and Add Button */
-input[type="text"] {
-  width: 70%;
-  padding: 12px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 button {
-  margin-left: 10px;
-  padding: 10px 16px;
-  font-size: 1rem;
   border: none;
-  border-radius: 5px;
-  color: white;
   cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 14px 20px;
 }
 
-/* Button color tweaks */
-.add-button,
-.uppercase-all-button,
-.task-buttons button {
-  background-color: #1a3c2f; /* bottle green */
+button:active {
+  transform: scale(0.98);
 }
 
-.add-button:hover,
-.uppercase-all-button:hover,
-.task-buttons button:hover {
-  background-color: #145a32; /* darker shade for hover */
-}
-
-/* Task container styling */
-.task-container {
-  background-color: #2d3e50;
-  margin: 1rem auto;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.add-button {
+  background-color: #6a0dad;
   color: white;
+  box-shadow: 0 4px 12px rgba(106, 13, 173, 0.3);
 }
 
-/* Checkbox styling */
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+.add-button:hover {
+  background-color: #5d079e;
+}
+
+.uppercase-all-button {
+  width: 100%;
+  background-color: #6a0dad;
+  color: white;
+  margin-top: 25px;
+  box-shadow: 0 4px 12px rgba(106, 13, 173, 0.3);
+}
+
+.uppercase-all-button:hover {
+  background-color: #5d079e;
+  transform: scale(1.01);
+}
+
+.button-group button {
+  padding: 10px 14px;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  font-weight: normal;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  border: 1px solid #333;
+}
+
+.button-group button:hover {
+  background-color: #2b2b2b;
+}
+
+.button-group button svg {
+    color: #e0e0e0;
 }

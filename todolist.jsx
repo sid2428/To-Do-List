@@ -1,48 +1,91 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import "./ToDoList.css"; // import CSS
+import { FaTrash, FaPen, FaCheckCircle, FaSave, FaTimes } from 'react-icons/fa';
+import "./ToDoList.css";
+import "./App.css";
 
 function ToDoList() {
-    let [todos, settodos] = useState([{ task: "Sample", id: uuidv4() }]);
-    let [newTodo, setnewTodo] = useState("");
+    let [todos, setTodos] = useState([{ task: "Sample", id: uuidv4(), isDeleting: false, isDone: false, isEditing: false, isAnimating: false }]);
+    let [newTodo, setNewTodo] = useState("");
 
     let addNewTask = () => {
-        settodos((prevTodos) => {
-            return [...prevTodos, { task: newTodo, id: uuidv4() }];
+        if (newTodo.trim() === "") {
+            return;
+        }
+        setTodos((prevTodos) => {
+            return [...prevTodos, { task: newTodo.trim(), id: uuidv4(), isDeleting: false, isDone: false, isEditing: false, isAnimating: false }];
         });
-        setnewTodo("");
+        setNewTodo("");
     };
 
     let updateTodo = (event) => {
-        setnewTodo(event.target.value);
+        setNewTodo(event.target.value);
     };
 
     let deleteToDo = (id) => {
-        let newcopy = todos.filter((todo) => todo.id !== id);
-        settodos(newcopy);
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, isDeleting: true } : todo
+            )
+        );
+
+        setTimeout(() => {
+            setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+        }, 600);
     };
 
-    let UpperCaseAll = () => {
-        settodos((prevupdate) =>
-            prevupdate.map((todo) => ({
+    let uppercaseAll = () => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) => ({
                 ...todo,
                 task: todo.task.toUpperCase(),
             }))
         );
     };
 
-    let UpperCaseOne = (id) => {
-        settodos((prevupdate) =>
-            prevupdate.map((todo) =>
-                todo.id === id ? { ...todo, task: todo.task.toUpperCase() } : todo
+    let toggleDone = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, isDone: !todo.isDone, isAnimating: true } : todo
+            )
+        );
+        setTimeout(() => {
+            setTodos((prevTodos) =>
+                prevTodos.map((todo) =>
+                    todo.id === id ? { ...todo, isAnimating: false } : todo
+                )
+            );
+        }, 500);
+    };
+    
+    // NEW FUNCTIONALITY FOR EDITING
+    let handleEdit = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, isEditing: true } : todo
             )
         );
     };
 
-    let Done = (id) => {
-        settodos((prevTodos) =>
+    let saveEdit = (id, newText) => {
+        setTodos((prevTodos) =>
             prevTodos.map((todo) =>
-                todo.id === id ? { ...todo, task: "✅ " + todo.task } : todo
+                todo.id === id ? { ...todo, task: newText, isEditing: false, isAnimating: true } : todo
+            )
+        );
+        setTimeout(() => {
+            setTodos((prevTodos) =>
+                prevTodos.map((todo) =>
+                    todo.id === id ? { ...todo, isAnimating: false } : todo
+                )
+            );
+        }, 500);
+    };
+    
+    let cancelEdit = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, isEditing: false } : todo
             )
         );
     };
@@ -56,24 +99,53 @@ function ToDoList() {
                     placeholder="Add a task"
                     value={newTodo}
                     onChange={updateTodo}
+                    onKeyDown={(e) => e.key === 'Enter' && addNewTask()}
                 />
                 <button className="add-button" onClick={addNewTask}>Add</button>
             </div>
 
             <ul className="task-list">
                 {todos.map((todo) => (
-                    <li key={todo.id} className="task-item">
-                        <span className="task-text">{todo.task}</span>
+                    <li key={todo.id} className={`task-item ${todo.isDeleting ? 'deleting' : ''}`}>
+                        {todo.isEditing ? (
+                            <input
+                                type="text"
+                                className="edit-input"
+                                defaultValue={todo.task}
+                                autoFocus
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        saveEdit(todo.id, e.target.value);
+                                    }
+                                    if (e.key === 'Escape') {
+                                        cancelEdit(todo.id);
+                                    }
+                                }}
+                            />
+                        ) : (
+                            <span className={`task-text ${todo.isDone ? 'completed' : ''}`}>
+                                {todo.task}
+                            </span>
+                        )}
                         <div className="button-group">
-                            <button onClick={() => deleteToDo(todo.id)}>Delete</button>
-                            <button onClick={() => UpperCaseOne(todo.id)}>UpperCase</button>
-                            <button onClick={() => Done(todo.id)}>Mark as Done</button>
+                            {todo.isEditing ? (
+                                <>
+                                    <button onClick={() => saveEdit(todo.id, document.querySelector('.edit-input').value)} title="Save"><FaSave /></button>
+                                    <button onClick={() => cancelEdit(todo.id)} title="Cancel"><FaTimes /></button>
+                                </>
+                            ) : (
+                                <>
+                                    <button onClick={() => deleteToDo(todo.id)} title="Delete"><FaTrash /></button>
+                                    <button onClick={() => handleEdit(todo.id)} title="Edit"><FaPen /></button>
+                                    <button onClick={() => toggleDone(todo.id)} className={todo.isAnimating ? 'done-animating' : ''} title="Mark as Done"><FaCheckCircle /></button>
+                                </>
+                            )}
                         </div>
                     </li>
                 ))}
             </ul>
 
-            <button className="uppercase-all" onClick={UpperCaseAll}>UpperCase All</button>
+            <button className="uppercase-all-button" onClick={uppercaseAll}>Uppercase All</button>
         </div>
     );
 }

@@ -1,9 +1,80 @@
-/* index.css - Global styles for your app */
+/* index.css - The Ultimate Wednesday Theme */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 body {
-  background-color: #0f172a; /* slate-900 */
+  background-color: #111111;
+  background-image: url('./nevermore.jpg'); /* Adjust path if needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #f0f0f0;
   margin: 0;
   padding: 0;
+  font-family: 'Cinzel', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative; /* For positioning the spider */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.20;
+  overflow-y: auto; /* Ensure scrollbar space is reserved if needed */
+}
+
+/* Animated Spider */
+.spider {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background-image: url('./spider.png'); /* Create a simple spider image */
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: crawl 5s infinite alternate;
+  z-index: 10; /* Ensure it's above other content */
+}
+
+@keyframes crawl {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-10px) translateY(-5px); }
+  50% { transform: translateX(0) translateY(-10px); }
+  75% { transform: translateX(10px) translateY(-5px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Base font size and line height for better readability */
+html {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Base font size and line height for better readability */
+html {
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Basic container styling */
