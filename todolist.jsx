@@ -34,6 +34,7 @@ function ToDoList() {
         }, 600);
     };
 
+    // The corrected function to uppercase all tasks
     let uppercaseAll = () => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) => ({
@@ -58,7 +59,6 @@ function ToDoList() {
         }, 500);
     };
     
-    // NEW FUNCTIONALITY FOR EDITING
     let handleEdit = (id) => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) =>
