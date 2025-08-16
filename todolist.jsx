@@ -34,14 +34,15 @@ function ToDoList() {
         }, 600);
     };
 
-    // The corrected function to uppercase all tasks
+    // Corrected function to uppercase all tasks
     let uppercaseAll = () => {
-        setTodos((prevTodos) =>
-            prevTodos.map((todo) => ({
+        const updatedTodos = todos.map((todo) => {
+            return {
                 ...todo,
                 task: todo.task.toUpperCase(),
-            }))
-        );
+            };
+        });
+        setTodos(updatedTodos);
     };
 
     let toggleDone = (id) => {
@@ -67,6 +68,7 @@ function ToDoList() {
         );
     };
 
+    // Corrected function to handle text from event target
     let saveEdit = (id, newText) => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) =>
@@ -130,7 +132,7 @@ function ToDoList() {
                         <div className="button-group">
                             {todo.isEditing ? (
                                 <>
-                                    <button onClick={() => saveEdit(todo.id, document.querySelector('.edit-input').value)} title="Save"><FaSave /></button>
+                                    <button onClick={(e) => saveEdit(todo.id, e.target.closest('.task-item').querySelector('.edit-input').value)} title="Save"><FaSave /></button>
                                     <button onClick={() => cancelEdit(todo.id)} title="Cancel"><FaTimes /></button>
                                 </>
                             ) : (
