@@ -34,23 +34,12 @@ function ToDoList() {
         }, 600);
     };
 
-    // Corrected function to uppercase all tasks
-    let uppercaseAll = () => {
-        const updatedTodos = todos.map((todo) => {
-            return {
-                ...todo,
-                task: todo.task.toUpperCase(),
-            };
-        });
-        setTodos(updatedTodos);
-    };
-
     let toggleDone = (id) => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) =>
                 todo.id === id ? { ...todo, isDone: !todo.isDone, isAnimating: true } : todo
             )
-        );
+            );
         setTimeout(() => {
             setTodos((prevTodos) =>
                 prevTodos.map((todo) =>
@@ -68,18 +57,17 @@ function ToDoList() {
         );
     };
 
-    // Corrected function to handle text from event target
     let saveEdit = (id, newText) => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) =>
                 todo.id === id ? { ...todo, task: newText, isEditing: false, isAnimating: true } : todo
-            )
+                )
         );
         setTimeout(() => {
             setTodos((prevTodos) =>
                 prevTodos.map((todo) =>
                     todo.id === id ? { ...todo, isAnimating: false } : todo
-                )
+                    )
             );
         }, 500);
     };
@@ -132,7 +120,7 @@ function ToDoList() {
                         <div className="button-group">
                             {todo.isEditing ? (
                                 <>
-                                    <button onClick={(e) => saveEdit(todo.id, e.target.closest('.task-item').querySelector('.edit-input').value)} title="Save"><FaSave /></button>
+                                    <button onClick={() => saveEdit(todo.id, document.querySelector('.edit-input').value)} title="Save"><FaSave /></button>
                                     <button onClick={() => cancelEdit(todo.id)} title="Cancel"><FaTimes /></button>
                                 </>
                             ) : (
@@ -146,8 +134,6 @@ function ToDoList() {
                     </li>
                 ))}
             </ul>
-
-            <button className="uppercase-all-button" onClick={uppercaseAll}>Uppercase All</button>
         </div>
     );
 }
